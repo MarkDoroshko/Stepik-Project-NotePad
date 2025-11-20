@@ -1,7 +1,9 @@
 package com.example.stepik_project_notepad.domain
 
-class EditNoteUseCase {
+class EditNoteUseCase(
+    private val repository: NotesRepository
+) {
     operator fun invoke(note: Note) {
-        TODO()
+        repository.editNote(note)
     }
 }
