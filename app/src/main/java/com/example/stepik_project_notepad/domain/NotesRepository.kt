@@ -3,7 +3,7 @@ package com.example.stepik_project_notepad.domain
 import kotlinx.coroutines.flow.Flow
 
 interface NotesRepository {
-    fun addNote(note: Note)
+    fun addNote(title: String, content: String)
 
     fun deleteNote(noteId: Int)
 
