@@ -1,4 +1,4 @@
-package com.example.stepik_project_notepad.ui.theme
+package com.example.stepik_project_notepad.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
