@@ -27,7 +27,7 @@ fun NotesScreen(
 //    val scrollState = remember { ScrollState(0) }
 
     LazyColumn(
-        modifier = Modifier
+        modifier = modifier
             .padding(top = 48.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -37,7 +37,10 @@ fun NotesScreen(
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(state.pinnedNotes) { note ->
+                items(
+                    items = state.pinnedNotes,
+                    key = { it.id }
+                ) { note ->
                     NotesCard(
                         note = note
                     ) { viewModel.processCommand(NotesCommand.SwitchPinnedStatus(it.id)) }
@@ -45,7 +48,10 @@ fun NotesScreen(
             }
         }
 
-        items(state.otherNotes) { note ->
+        items(
+            items = state.otherNotes,
+            key = { it.id }
+        ) { note ->
             NotesCard(
                 note = note
             ) { viewModel.processCommand(NotesCommand.SwitchPinnedStatus(it.id)) }
@@ -60,7 +66,7 @@ fun NotesCard(
     onNoteClick: (Note) -> Unit
 ) {
     Text(
-        modifier = Modifier.clickable { onNoteClick(note) },
+        modifier = modifier.clickable { onNoteClick(note) },
         text = "${note.title} - ${note.content}",
         fontSize = 24.sp
     )
