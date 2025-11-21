@@ -3,10 +3,15 @@ package com.example.stepik_project_notepad.domain
 class AddNoteUseCase(
     private val repository: NotesRepository
 ) {
-    operator fun invoke(
+    suspend operator fun invoke(
         title: String,
         content: String
     ) {
-        repository.addNote(title, content)
+        repository.addNote(
+            title = title,
+            content = content,
+            isPinned = false,
+            updatedAt = System.currentTimeMillis()
+        )
     }
 }
