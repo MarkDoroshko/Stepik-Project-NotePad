@@ -2,6 +2,7 @@
 
 package com.example.stepik_project_notepad.presentation.screens.creation
 
+import android.content.IntentSender
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +22,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,7 +36,8 @@ import com.example.stepik_project_notepad.presentation.utils.DateFormatter
 @Composable
 fun CreateNoteScreen(
     modifier: Modifier = Modifier,
-    viewModel: CreateNoteViewModel = viewModel()
+    viewModel: CreateNoteViewModel = viewModel(),
+    onFinished: () -> Unit
 ) {
     val state = viewModel.state.collectAsState()
     val currentState = state.value
@@ -157,7 +160,7 @@ fun CreateNoteScreen(
         }
 
         CreateNoteState.Finished -> {
-
+            LaunchedEffect(key1 = Unit) { onFinished() }
         }
 
     }

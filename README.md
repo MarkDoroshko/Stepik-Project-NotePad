@@ -8,3 +8,5 @@
     - Modifier
     - Данные для отображения
     - Callbacks
+* SideEffect - callback будет вызван при каждой рекомпозиции
+* LaunchedEffect - callback будет вызван после рекомпозиции, если значение ключа поменялось
