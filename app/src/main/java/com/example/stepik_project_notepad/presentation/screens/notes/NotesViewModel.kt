@@ -27,12 +27,7 @@ import kotlinx.coroutines.launch
 
 class NotesViewModel : ViewModel() {
     private val repository = TestNotesRepositoryImpl  // НЕЛЬЗЯ!!!
-
-    private val addNoteUseCase = AddNoteUseCase(repository)
-    private val editNoteUseCase = EditNoteUseCase(repository)
-    private val deleteNoteUseCase = DeleteNoteUseCase(repository)
     private val getAllNotesUseCase = GetAllNotesUseCase(repository)
-    private val getNoteUseCase = GetNoteUseCase(repository)
     private val searchNotesUseCase = SearchNotesUseCase(repository)
     private val switchPinnedStatusUseCase = SwitchPinnedStatusUseCase(repository)
 
@@ -42,8 +37,6 @@ class NotesViewModel : ViewModel() {
     val state = _state.asStateFlow()
 
     init {
-        addSomeNotes()
-
         query
             .onEach { input ->
                 _state.update { it.copy(query = input) }
@@ -60,28 +53,9 @@ class NotesViewModel : ViewModel() {
             .launchIn(viewModelScope)
     }
 
-    // TODO: don't forget to remove it
-    private fun addSomeNotes() {
-        viewModelScope.launch {
-            repeat(50_000) {
-                addNoteUseCase(title = "Title №$it", content = "Content №$it")
-            }
-        }
-    }
-
     fun processCommand(command: NotesCommand) {
         viewModelScope.launch {
             when (command) {
-                is NotesCommand.DeleteNote -> {
-                    deleteNoteUseCase(command.noteId)
-                }
-
-                is NotesCommand.EditNote -> {
-                    val note = getNoteUseCase(command.note.id)
-                    val title = note.title
-                    editNoteUseCase(note.copy(title = title + " edited"))
-                }
-
                 is NotesCommand.InputSearchQuery -> {
                     query.update { command.query.trim() }
                 }
@@ -99,12 +73,6 @@ sealed interface NotesCommand {
     data class InputSearchQuery(val query: String) : NotesCommand
 
     data class SwitchPinnedStatus(val noteId: Int) : NotesCommand
-
-    // Temp
-
-    data class DeleteNote(val noteId: Int) : NotesCommand
-
-    data class EditNote(val note: Note) : NotesCommand
 }
 
 data class NotesScreenState(

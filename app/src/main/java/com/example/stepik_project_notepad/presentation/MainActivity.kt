@@ -20,12 +20,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             StepikProjectNotePadTheme {
-                NotesScreen()
+                NotesScreen(
+                    onNoteClick = {},
+                    onAddNoteClick = {}
+                )
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
