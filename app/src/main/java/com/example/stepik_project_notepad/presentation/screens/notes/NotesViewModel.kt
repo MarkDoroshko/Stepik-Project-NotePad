@@ -2,8 +2,10 @@
 
 package com.example.stepik_project_notepad.presentation.screens.notes
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.stepik_project_notepad.data.NotesRepositoryImpl
 import com.example.stepik_project_notepad.data.TestNotesRepositoryImpl
 import com.example.stepik_project_notepad.domain.AddNoteUseCase
 import com.example.stepik_project_notepad.domain.DeleteNoteUseCase
@@ -25,8 +27,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class NotesViewModel : ViewModel() {
-    private val repository = TestNotesRepositoryImpl  // НЕЛЬЗЯ!!!
+class NotesViewModel(context: Context) : ViewModel() {
+    private val repository = NotesRepositoryImpl.getInstance(context)  // НЕЛЬЗЯ!!!
     private val getAllNotesUseCase = GetAllNotesUseCase(repository)
     private val searchNotesUseCase = SearchNotesUseCase(repository)
     private val switchPinnedStatusUseCase = SwitchPinnedStatusUseCase(repository)
