@@ -1,46 +1,44 @@
 package com.example.stepik_project_notepad.presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.stepik_project_notepad.presentation.screens.creation.CreateNoteScreen
 import com.example.stepik_project_notepad.presentation.screens.editing.EditNoteScreen
 import com.example.stepik_project_notepad.presentation.screens.notes.NotesScreen
 
 @Composable
 fun NavGraph() {
-    val screen = remember {
-        mutableStateOf<Screen>(Screen.Notes)
-    }
-
-    when (val currentScreen = screen.value) {
-        Screen.CreateNote -> {
-            CreateNoteScreen(
-                onFinished = { screen.value = Screen.Notes }
-            )
-        }
-
-        is Screen.EditNote -> {
-            EditNoteScreen(
-                noteId = currentScreen.noteId,
-                onFinished = { screen.value = Screen.Notes }
-            )
-        }
-
-        Screen.Notes -> {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = Screen.Notes.route
+    ) {
+        composable(Screen.Notes.route) {
             NotesScreen(
-                onNoteClick = { screen.value = Screen.EditNote(it.id) },
-                onAddNoteClick = { screen.value = Screen.CreateNote }
+                onNoteClick = { navController.popBackStack() },
+                onAddNoteClick = { navController.popBackStack() }
             )
         }
-
+        composable(Screen.CreateNote.route) {
+            CreateNoteScreen(
+                onFinished = { navController.popBackStack() }
+            )
+        }
+        composable(Screen.EditNote.route) {
+            EditNoteScreen(
+                noteId = 5,
+                onFinished = { navController.popBackStack() }
+            )
+        }
     }
 }
 
-sealed interface Screen {
-    data object Notes : Screen
+sealed class Screen(val route: String) {
+    data object Notes : Screen("notes")
 
-    data object CreateNote : Screen
+    data object CreateNote : Screen("create_note")
 
-    data class EditNote(val noteId: Int) : Screen
+    data object EditNote : Screen("edit_note")
 }
