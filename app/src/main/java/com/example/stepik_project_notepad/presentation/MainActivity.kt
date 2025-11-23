@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.stepik_project_notepad.presentation.navigation.NavGraph
 import com.example.stepik_project_notepad.presentation.screens.notes.NotesScreen
 import com.example.stepik_project_notepad.presentation.ui.theme.StepikProjectNotePadTheme
 
@@ -20,10 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             StepikProjectNotePadTheme {
-                NotesScreen(
-                    onNoteClick = {},
-                    onAddNoteClick = {}
-                )
+                NavGraph()
             }
         }
     }
