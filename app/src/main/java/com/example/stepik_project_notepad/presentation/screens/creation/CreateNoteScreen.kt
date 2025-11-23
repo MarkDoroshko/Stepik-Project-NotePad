@@ -2,7 +2,6 @@
 
 package com.example.stepik_project_notepad.presentation.screens.creation
 
-import android.content.IntentSender
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
