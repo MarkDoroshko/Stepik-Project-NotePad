@@ -1,6 +1,8 @@
 package com.example.stepik_project_notepad.domain
 
-class AddNoteUseCase(
+import javax.inject.Inject
+
+class AddNoteUseCase @Inject constructor(
     private val repository: NotesRepository
 ) {
     suspend operator fun invoke(

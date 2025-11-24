@@ -2,7 +2,6 @@
 
 package com.example.stepik_project_notepad.presentation.screens.creation
 
-import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,16 +30,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stepik_project_notepad.presentation.screens.notes.NotesViewModel
 import com.example.stepik_project_notepad.presentation.utils.DateFormatter
 
 @Composable
 fun CreateNoteScreen(
     modifier: Modifier = Modifier,
-    context: Context = LocalContext.current.applicationContext,
-    viewModel: CreateNoteViewModel = viewModel {
-        CreateNoteViewModel(context)
-    },
+    viewModel: CreateNoteViewModel = hiltViewModel(),
     onFinished: () -> Unit
 ) {
     val state = viewModel.state.collectAsState()
