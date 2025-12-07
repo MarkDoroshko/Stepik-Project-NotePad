@@ -1,5 +1,6 @@
 package com.example.stepik_project_notepad.data
 
+import com.example.stepik_project_notepad.domain.ContentItem
 import com.example.stepik_project_notepad.domain.Note
 import com.example.stepik_project_notepad.domain.NotesRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,11 +12,12 @@ class NotesRepositoryImpl @Inject constructor(
 ) : NotesRepository {
     override suspend fun addNote(
         title: String,
-        content: String,
+        content: List<ContentItem>,
         isPinned: Boolean,
         updatedAt: Long
     ) {
-        val noteDbModel = NoteDbModel(0, title, content, updatedAt, isPinned)
+        val note = Note(0, title, content, updatedAt, isPinned)
+        val noteDbModel = note.toDbModel()
         notesDao.addNote(noteDbModel)
     }
 

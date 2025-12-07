@@ -3,7 +3,12 @@ package com.example.stepik_project_notepad.domain
 import kotlinx.coroutines.flow.Flow
 
 interface NotesRepository {
-    suspend fun addNote(title: String, content: String, isPinned: Boolean, updatedAt: Long)
+    suspend fun addNote(
+        title: String,
+        content: List<ContentItem>,
+        isPinned: Boolean,
+        updatedAt: Long
+    )
 
     suspend fun deleteNote(noteId: Int)
 
