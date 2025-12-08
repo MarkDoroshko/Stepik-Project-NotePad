@@ -1,6 +1,7 @@
 package com.example.stepik_project_notepad.di
 
 import android.content.Context
+import androidx.room.Room
 import com.example.stepik_project_notepad.data.NotesDao
 import com.example.stepik_project_notepad.data.NotesDatabase
 import com.example.stepik_project_notepad.data.NotesRepositoryImpl
@@ -28,7 +29,11 @@ interface DataModule {
         fun provideDatabase(
             @ApplicationContext context: Context
         ): NotesDatabase {
-            return NotesDatabase.getInstance(context)
+            return Room.databaseBuilder(
+                context = context,
+                klass = NotesDatabase::class.java,
+                name = "notes.db"
+            ).fallbackToDestructiveMigration(dropAllTables = true).build()
         }
 
         @Singleton
