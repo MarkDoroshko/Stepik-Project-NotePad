@@ -2,6 +2,8 @@
 
 package com.example.stepik_project_notepad.presentation.screens.editing
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,8 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.stepik_project_notepad.domain.ContentItem
+import com.example.stepik_project_notepad.presentation.screens.creation.CreateNoteCommand
 import com.example.stepik_project_notepad.presentation.screens.editing.EditNoteCommand.InputContent
 import com.example.stepik_project_notepad.presentation.screens.editing.EditNoteCommand.InputTitle
+import com.example.stepik_project_notepad.presentation.ui.theme.Content
+import com.example.stepik_project_notepad.presentation.ui.theme.CustomIcons
 import com.example.stepik_project_notepad.presentation.utils.DateFormatter
 
 @Composable
@@ -49,6 +54,14 @@ fun EditNoteScreen(
 ) {
     val state = viewModel.state.collectAsState()
     val currentState = state.value
+
+    val imagePicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            viewModel.processCommand(EditNoteCommand.AddImage(it))
+        }
+    }
 
     when (currentState) {
         is EditNoteState.Editing -> {
@@ -72,7 +85,17 @@ fun EditNoteScreen(
                         actions = {
                             Icon(
                                 modifier = Modifier
-                                    .padding(end = 16.dp)
+                                    .clickable {
+                                        imagePicker.launch("image/*")
+                                    }
+                                    .padding(end = 16.dp),
+                                imageVector = CustomIcons.AddPhoto,
+                                contentDescription = "Add photo from gallery",
+                                tint = MaterialTheme.colorScheme.onSurface
+                            )
+                            Icon(
+                                modifier = Modifier
+                                    .padding(end = 24.dp)
                                     .clickable {
                                         viewModel.processCommand(EditNoteCommand.Delete)
                                     },
@@ -131,12 +154,23 @@ fun EditNoteScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
-                    currentState.note.content.filterIsInstance<ContentItem.Text>().forEach { contentItemText ->
-                        TextContent(
-                            modifier = Modifier.weight(1f),
-                            text = contentItemText.content
-                        ) { viewModel.processCommand(EditNoteCommand.InputContent(it)) }
-                    }
+                    Content(
+                        modifier = Modifier.weight(1f),
+                        content = currentState.note.content,
+                        onDeleteImageClick = {
+                            viewModel.processCommand(
+                                EditNoteCommand.DeleteImage(it)
+                            )
+                        },
+                        onTextChanged = { index, text ->
+                            viewModel.processCommand(
+                                InputContent(
+                                    text,
+                                    index
+                                )
+                            )
+                        }
+                    )
 
                     Button(
                         modifier = Modifier
