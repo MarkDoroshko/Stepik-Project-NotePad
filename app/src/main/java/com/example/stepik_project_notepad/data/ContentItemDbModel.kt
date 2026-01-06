@@ -1,12 +1,27 @@
 package com.example.stepik_project_notepad.data
 
-import kotlinx.serialization.Serializable
+import androidx.room.Entity
+import androidx.room.ForeignKey
 
-@Serializable
-sealed interface ContentItemDbModel {
-    @Serializable
-    data class Text(val content: String) : ContentItemDbModel
+@Entity(
+    tableName = "content",
+    primaryKeys = ["noteId", "order"],
+    foreignKeys = [
+        ForeignKey(
+            entity = NoteDbModel::class,
+            parentColumns = ["id"],
+            childColumns = ["noteId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
+data class ContentItemDbModel(
+    val noteId: Int,
+    val contentType: ContentType,
+    val content: String,
+    val order: Int
+)
 
-    @Serializable
-    data class Image(val url: String) : ContentItemDbModel
+enum class ContentType {
+    TEXT, IMAGE
 }
