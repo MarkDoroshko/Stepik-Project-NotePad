@@ -2,7 +2,6 @@ package com.example.stepik_project_notepad.data
 
 import com.example.stepik_project_notepad.domain.ContentItem
 import com.example.stepik_project_notepad.domain.Note
-import kotlinx.serialization.json.Json
 
 fun Note.toDbModel(): NoteDbModel {
     return NoteDbModel(id, title, updatedAt, isPinned)
