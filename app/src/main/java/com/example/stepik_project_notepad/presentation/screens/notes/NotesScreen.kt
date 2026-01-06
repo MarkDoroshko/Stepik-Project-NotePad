@@ -273,7 +273,7 @@ fun NoteCardWithImage(
         Box {
             AsyncImage(
                 modifier = Modifier
-                    .heightIn(120.dp)
+                    .height(120.dp)
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(16.dp)),
                 model = imageUrl,
