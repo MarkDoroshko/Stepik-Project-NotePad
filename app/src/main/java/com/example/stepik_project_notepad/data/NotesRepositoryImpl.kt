@@ -19,9 +19,7 @@ class NotesRepositoryImpl @Inject constructor(
     ) {
         val processedContent = content.processForStorage()
         val noteDbModel = NoteDbModel(0, title, updatedAt, isPinned)
-        val noteId = notesDao.addNote(noteDbModel).toInt()
-        val contentItems = processedContent.toContentItemsDbModel(noteId)
-        notesDao.addNoteContent(contentItems)
+        notesDao.addNoteWithContent(noteDbModel, processedContent)
     }
 
     override suspend fun deleteNote(noteId: Int) {
@@ -43,12 +41,13 @@ class NotesRepositoryImpl @Inject constructor(
 
         removedUrls.forEach { imageFileManager.deleteImage(it) }
 
-        val processContent = note.content.processForStorage()
-        val processedNote = note.copy(content = processContent)
+        val processedContent = note.content.processForStorage()
+        val processedNote = note.copy(content = processedContent)
 
-        notesDao.addNote(processedNote.toDbModel())
-        notesDao.deleteNoteContent(note.id)
-        notesDao.addNoteContent(processContent.toContentItemsDbModel(note.id))
+        notesDao.updateNote(
+            noteDbModel = processedNote.toDbModel(),
+            content = processedContent.toContentItemsDbModel(note.id)
+        )
     }
 
     override fun getAllNotes(): Flow<List<Note>> {
