@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Stepik-Project-NotePad</string>
+    <string name="search">Поиск…</string>
+    <string name="pinned">Закреплённые</string>
+    <string name="all_notes">Все заметки</string>
+    <string name="edit_note">Изменение заметки</string>
+    <string name="others">Другие</string>
+    <string name="create_note">Создание заметки</string>
+    <string name="title">Заголовок</string>
+    <string name="save_note">Сохранить заметку</string>
+    <string name="note_something_down">Запишите кое-что</string>
+    <string name="just_now">Прямо сейчас</string>
+    <string name="h_ago">%1$d ч назад</string>
+</resources>

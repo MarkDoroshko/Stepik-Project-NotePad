@@ -24,3 +24,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Stepik-Project-NotePad"
 include(":app")
+include(":core:domain")
+include(":core:ui")
+include(":core:data")
+include(":feature:notes")
+include(":feature:creation")
+include(":feature:editing")
