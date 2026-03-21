@@ -5,6 +5,10 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import com.example.data.local.mapper.toContentItemsDbModel
+import com.example.data.local.model.ContentItemDbModel
+import com.example.data.local.model.NoteDbModel
+import com.example.data.local.model.NoteWithContentDbModel
 import com.example.domain.entity.ContentItem
 import kotlinx.coroutines.flow.Flow
 
@@ -21,9 +25,9 @@ interface NotesDao {
     @Transaction
     @Query(
         """
-        SELECT DISTINCT notes.* FROM notes JOIN content ON notes.id == content.noteId 
-        WHERE title LIKE '%' || :query || '%' 
-        OR content LIKE '%' || :query || '%' 
+        SELECT DISTINCT notes.* FROM notes JOIN content ON notes.id == content.noteId
+        WHERE title LIKE '%' || :query || '%'
+        OR content LIKE '%' || :query || '%'
         ORDER BY updatedAt DESC
         """
     )

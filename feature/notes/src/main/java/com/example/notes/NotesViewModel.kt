@@ -4,10 +4,10 @@ package com.example.notes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.stepik_project_notepad.domain.GetAllNotesUseCase
-import com.example.stepik_project_notepad.domain.Note
-import com.example.stepik_project_notepad.domain.SearchNotesUseCase
-import com.example.stepik_project_notepad.domain.SwitchPinnedStatusUseCase
+import com.example.domain.entity.Note
+import com.example.domain.usecase.GetAllNotesUseCase
+import com.example.domain.usecase.SearchNotesUseCase
+import com.example.domain.usecase.SwitchPinnedStatusUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

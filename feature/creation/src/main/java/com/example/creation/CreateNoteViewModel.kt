@@ -3,9 +3,9 @@ package com.example.creation
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.stepik_project_notepad.domain.AddNoteUseCase
-import com.example.stepik_project_notepad.domain.ContentItem
-import com.example.stepik_project_notepad.domain.ContentItem.*
+import com.example.domain.entity.ContentItem
+import com.example.domain.entity.ContentItem.*
+import com.example.domain.usecase.AddNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

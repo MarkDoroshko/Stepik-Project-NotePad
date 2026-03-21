@@ -24,11 +24,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import coil3.compose.AsyncImage
 import com.example.domain.entity.ContentItem
-import com.example.stepik_project_notepad.R
-import kotlin.collections.drop
-import kotlin.collections.forEachIndexed
+import com.example.ui.R
 
 @Composable
 fun Content(

@@ -39,10 +39,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
+import com.example.domain.entity.ContentItem
 import com.example.domain.entity.Note
 import com.example.ui.R
+import com.example.ui.theme.OtherNotesColors
+import com.example.ui.theme.PinnedNotesColors
+import com.example.ui.utils.DateFormatter
 
 @Composable
 fun NotesScreen(

@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.compose)      // Compose-компилятор для @Composable
+    alias(libs.plugins.ksp)                 // ДОБАВЛЕН — для кодогенерации Hilt
+    alias(libs.plugins.hilt.android)        // ДОБАВЛЕН — для @HiltViewModel
 }
 
 android {
@@ -30,23 +32,38 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
+    // Наши модули
+    implementation(project(":core:domain"))  // Use-case'ы, Note, ContentItem
+    implementation(project(":core:ui"))      // Тема, цвета, DateFormatter
+
+    // Hilt — DI для ViewModel
     implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)         // ДОБАВЛЕН — без этого @HiltViewModel не генерирует код
+    implementation(libs.androidx.hilt.navigation.compose)  // hiltViewModel()
+
+    // Coil — для AsyncImage в карточках заметок
     implementation(libs.coil.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Navigation — для возможности использовать навигационные API
     implementation(libs.androidx.navigation.compose)
+
+    // Lifecycle — для viewModelScope, collectAsState
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+
+    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons)
+
+    // Android KTX
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+
+    // УДАЛЕНЫ: appcompat, material, activity-compose — не нужны в этом модуле
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

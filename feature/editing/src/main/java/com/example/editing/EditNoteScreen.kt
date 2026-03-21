@@ -30,7 +30,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Delete
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.ui.R
 import com.example.ui.theme.Content
 import com.example.ui.theme.CustomIcons
@@ -120,7 +123,7 @@ fun EditNoteScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 8.dp),
                         value = currentState.note.title,
-                        onValueChange = { viewModel.processCommand(InputTitle(it)) },
+                        onValueChange = { viewModel.processCommand(EditNoteCommand.InputTitle(it)) },
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = Color.Transparent,
                             unfocusedContainerColor = Color.Transparent,
@@ -159,7 +162,7 @@ fun EditNoteScreen(
                         },
                         onTextChanged = { index, text ->
                             viewModel.processCommand(
-                                InputContent(
+                                EditNoteCommand.InputContent(
                                     text,
                                     index
                                 )

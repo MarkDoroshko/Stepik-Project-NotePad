@@ -3,11 +3,11 @@ package com.example.editing
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.stepik_project_notepad.domain.ContentItem
-import com.example.stepik_project_notepad.domain.DeleteNoteUseCase
-import com.example.stepik_project_notepad.domain.EditNoteUseCase
-import com.example.stepik_project_notepad.domain.GetNoteUseCase
-import com.example.stepik_project_notepad.domain.Note
+import com.example.domain.entity.ContentItem
+import com.example.domain.entity.Note
+import com.example.domain.usecase.DeleteNoteUseCase
+import com.example.domain.usecase.EditNoteUseCase
+import com.example.domain.usecase.GetNoteUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.compose)      // Compose-компилятор
+    alias(libs.plugins.ksp)                 // ДОБАВЛЕН — для Hilt
+    alias(libs.plugins.hilt.android)        // ДОБАВЛЕН — для @HiltViewModel
 }
 
 android {
@@ -30,23 +32,36 @@ android {
 }
 
 dependencies {
+    // Наши модули
     implementation(project(":core:domain"))
     implementation(project(":core:ui"))
+
+    // Hilt
     implementation(libs.hilt.android)
-    implementation(libs.coil.compose)
+    ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    // Navigation
     implementation(libs.androidx.navigation.compose)
+
+    // Lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Activity — для rememberLauncherForActivityResult (выбор фото из галереи)
     implementation(libs.androidx.activity.compose)
+
+    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons)
+
+    // Android KTX
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

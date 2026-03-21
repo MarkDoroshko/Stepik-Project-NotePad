@@ -30,7 +30,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.ui.R
 import com.example.ui.theme.Content
 import com.example.ui.theme.CustomIcons

@@ -1,13 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.ksp)                 // Для кодогенерации Room и Hilt
+    alias(libs.plugins.hilt.android)        // БЫЛ ПРОПУЩЕН — нужен для @Module/@InstallIn
 }
 
 android {
     namespace = "com.example.data"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36                         // ИСПРАВЛЕН — был сломанный синтаксис compileSdk { version = release(36) }
 
     defaultConfig {
         minSdk = 24
@@ -32,15 +31,23 @@ android {
 }
 
 dependencies {
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
+    // Наш domain-модуль — для доступа к Note, ContentItem, NotesRepository
     implementation(project(":core:domain"))
+
+    // Room — ORM для работы с SQLite
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+
+    // Hilt — DI-фреймворк
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+
+    // Android KTX — для toUri() и прочих extension'ов
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+
+    // УДАЛЕНЫ: appcompat и material — они для View-based UI, в data-слое не нужны
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

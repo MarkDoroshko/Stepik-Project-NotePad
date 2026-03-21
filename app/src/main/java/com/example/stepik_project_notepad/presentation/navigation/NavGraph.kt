@@ -5,9 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.stepik_project_notepad.presentation.screens.creation.CreateNoteScreen
-import com.example.stepik_project_notepad.presentation.screens.editing.EditNoteScreen
-import com.example.stepik_project_notepad.presentation.screens.notes.NotesScreen
+import com.example.creation.CreateNoteScreen
+import com.example.editing.EditNoteScreen
+import com.example.notes.NotesScreen
 
 @Composable
 fun NavGraph() {
