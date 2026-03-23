@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.compose)      // Compose-компилятор для @Composable
-    alias(libs.plugins.ksp)                 // ДОБАВЛЕН — для кодогенерации Hilt
-    alias(libs.plugins.hilt.android)        // ДОБАВЛЕН — для @HiltViewModel
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -32,22 +32,21 @@ android {
 }
 
 dependencies {
-    // Наши модули
-    implementation(project(":core:domain"))  // Use-case'ы, Note, ContentItem
-    implementation(project(":core:ui"))      // Тема, цвета, DateFormatter
+    implementation(project(":core:domain"))
+    implementation(project(":core:ui"))
 
-    // Hilt — DI для ViewModel
+    // Hilt
     implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)         // ДОБАВЛЕН — без этого @HiltViewModel не генерирует код
-    implementation(libs.androidx.hilt.navigation.compose)  // hiltViewModel()
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
-    // Coil — для AsyncImage в карточках заметок
+    // Coil
     implementation(libs.coil.compose)
 
-    // Navigation — для возможности использовать навигационные API
+    // Navigation Compose
     implementation(libs.androidx.navigation.compose)
 
-    // Lifecycle — для viewModelScope, collectAsState
+    // Lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
@@ -61,8 +60,6 @@ dependencies {
 
     // Android KTX
     implementation(libs.androidx.core.ktx)
-
-    // УДАЛЕНЫ: appcompat, material, activity-compose — не нужны в этом модуле
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -12,9 +12,9 @@ kotlin {
     }
 }
 dependencies {
-    // Coroutines — только core, без android (чистый Kotlin-модуль, нет Android SDK)
+    // Coroutines
     implementation(libs.kotlinx.coroutines.core)
 
-    // javax.inject — чтобы use-case'ы могли использовать @Inject без зависимости от Dagger/Hilt
+    // javax.inject
     implementation(libs.javax.inject)
 }

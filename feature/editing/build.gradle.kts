@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.compose)      // Compose-компилятор
-    alias(libs.plugins.ksp)                 // ДОБАВЛЕН — для Hilt
-    alias(libs.plugins.hilt.android)        // ДОБАВЛЕН — для @HiltViewModel
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-    // Наши модули
     implementation(project(":core:domain"))
     implementation(project(":core:ui"))
 
@@ -48,7 +47,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    // Activity — для rememberLauncherForActivityResult
+    // Activity
     implementation(libs.androidx.activity.compose)
 
     // Compose

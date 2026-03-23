@@ -1,11 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.compose)      // БЫЛ ПРОПУЩЕН — нужен для @Composable функций
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.example.ui"
-    compileSdk = 36                         // ИСПРАВЛЕН — был сломанный синтаксис compileSdk { version = release(36) }
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24
@@ -30,10 +30,9 @@ android {
 }
 
 dependencies {
-    // Domain — Content.kt использует ContentItem для отображения содержимого заметки
     implementation(project(":core:domain"))
 
-    // Coil — загрузка изображений в AsyncImage
+    // Coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
@@ -47,9 +46,6 @@ dependencies {
 
     // Android KTX
     implementation(libs.androidx.core.ktx)
-
-    // УДАЛЕНЫ: appcompat, material, activity-compose — не нужны в UI-библиотеке
-    // activity-compose нужен только в app (для setContent) и feature-модулях (для ActivityResultContracts)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
